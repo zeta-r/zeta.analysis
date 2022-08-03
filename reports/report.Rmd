@@ -19,7 +19,7 @@ author:
 citation_url: "`r Sys.getenv('PROJ_URL')`"
 date: "`r Sys.Date()`"
 bibliography: biblio.bib
-preview: man/img/LAIMS.png
+preview: man/img/logo.png
 output:
   distill::distill_article:
     toc: true
@@ -55,7 +55,7 @@ list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
 
 ```{r, echo=FALSE}
 htmltools::img(
- src = knitr::image_uri(here("man", "img", "LAIMS.png")),
+ src = knitr::image_uri(here("man", "img", "logo.png")),
  alt = 'logo',
  style = 'position:absolute; top:0; right:0; padding:10px;'
  )
@@ -98,7 +98,7 @@ targets::tar_visnetwork(
 You can get the results of your analyses by 
 
 ```{r}
-tar_read(result)
+str(tar_read(relevantResults), 1)
 ```
 
 

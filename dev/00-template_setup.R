@@ -46,7 +46,7 @@ usethis::use_roxygen_md()
 usethis::use_readme_rmd()
 usethis::use_code_of_conduct("corrado.lanera@ubep.unipd.it")
 usethis::use_lifecycle_badge("experimental")
-usethis::use_logo("man/img/LAIMS.png")
+usethis::use_logo("man/img/logo.png")
 
 
 # Checks ----------------------------------------------------------

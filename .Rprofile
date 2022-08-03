@@ -6,15 +6,15 @@ options(
 )
 
 usethis::ui_info("
-  Welcome to the LAIMS'project template!
+  Welcome to the Zeta Research project template!
 
   To set your environmental (private) variables,
     you can run {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
 
   Please, report any issue, comment, or suggestion to
-    https://github.com/UBESP-DCTV/laims.analysis/issues.
+    https://github.com/zeta-r/zeta.analysis/issues.
 
-  Thank you for using {usethis::ui_value('laims.template')}!
+  Thank you for using {usethis::ui_value('zeta.template')}!
 ")
 
 
@@ -43,9 +43,9 @@ if (Sys.getenv("PRJ_SHARED_PATH") == "") {
   ")
 
   usethis::ui_info("
-  You can set it to a shared path for the project.
-  You can set it in the {usethis::ui_value('.Renviron')} file.
-  You can open the project {usethis::ui_value('.Renviron')} file calling
+You can set it to a shared path for the project.
+You can set it in the {usethis::ui_value('.Renviron')} file.
+You can open the project {usethis::ui_value('.Renviron')} file calling
   {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
   ")
 
@@ -75,7 +75,8 @@ usethis::ui_done("
 .get_prj_shared_path <- function() Sys.getenv('PRJ_SHARED_PATH')
 
 targets::tar_config_set(
-  store = file.path(.get_prj_shared_path(), "_targets")
+  store = file.path(.get_prj_shared_path(), "_targets") |>
+    normalizePath()
 )
 
 targets::tar_config_set(

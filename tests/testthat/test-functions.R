@@ -1,12 +1,11 @@
-test_that("null template returns null", {
+test_that("trivial works", {
   # setup
   x <- 1
 
   # execution
-  res_empty <- null()
-  res_x <- null(x)
+  y <- x
 
   # expectations
-  expect_null(res_empty)
-  expect_null(res_x)
+  expect_equal(x, y)
+  expect_equal(y, 1)
 })

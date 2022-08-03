@@ -9,6 +9,7 @@
 ^01-dev_cycle\.R$
 ^\.lintr$
 ^_targets.R$
+^_targets.yaml$
 ^_targets$
 ^_targets_packages.R$
 ^reports$
