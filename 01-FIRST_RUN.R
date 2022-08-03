@@ -1,12 +1,12 @@
 
 # FIRST RUN ONLY ---------------------------------------------------
 
-## - [ ] Change the name of `laims.analyses.Rproj` using your main
+## - [ ] Change the name of `zeta.analyses.Rproj` using your main
 ##       project's directory name accordingly. To do that,
 ##       simply run the following code
 prj_name <- basename(here::here())
 fs::file_move(
-  here::here("laims.analysis.Rproj"),  # old project's name
+  here::here("zeta.analysis.Rproj"),  # old project's name
   paste0(prj_name, ".Rproj")  # current project's name
 )
 
@@ -21,7 +21,7 @@ here::here() |>
   c("DESCRIPTION") |>
   purrr::walk(~{
     readLines(.x) |>
-      stringr::str_replace_all("laims\\.analysis", prj_name) |>
+      stringr::str_replace_all("zeta\\.analysis", prj_name) |>
       writeLines(.x)
   })
 

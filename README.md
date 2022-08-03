@@ -1,24 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# laims.analysis <img src='man/figures/logo.png' align="right" height="120" />
+# zeta.analysis <img src='man/figures/logo.png' align="right" height="120" />
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/UBESP-DCTV/laims.analysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/UBESP-DCTV/laims.analysis?branch=master)
-[![R-CMD-check](https://github.com/UBESP-DCTV/laims.analysis/actions/workflows/check-release.yaml/badge.svg)](https://github.com/UBESP-DCTV/laims.analysis/actions/workflows/check-release.yaml)
-[![lint](https://github.com/UBESP-DCTV/laims.analysis/workflows/lint/badge.svg)](https://github.com/UBESP-DCTV/laims.analysis/actions)
+coverage](https://codecov.io/gh/UBESP-DCTV/zeta.analysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/UBESP-DCTV/zeta.analysis?branch=master)
+[![R-CMD-check](https://github.com/UBESP-DCTV/zeta.analysis/actions/workflows/check-release.yaml/badge.svg)](https://github.com/UBESP-DCTV/zeta.analysis/actions/workflows/check-release.yaml)
+[![lint](https://github.com/UBESP-DCTV/zeta.analysis/workflows/lint/badge.svg)](https://github.com/UBESP-DCTV/zeta.analysis/actions)
 <!-- badges: end -->
 
-This project would represent the template for the analyses conducted
-within the Laboratory of Artificial Intelligence from the Medical
-Sciences (LAIMS) at the Unit of Biostatistics, Epidemiology, and Public
-health (UBEP) within the Department of Cardiac, Thoracic, Vascular
-Sciences, and Public Health (DSCTVPH) of the University of Padova
-(UniPD).
+This project would represent the template for the analyses conducted at
+Zeta Research S.R.L.
 
 The aim is to provide a ready-to-use robust, reproducible infrastructure
 for complex to quick analyses.
@@ -60,7 +56,7 @@ of the project.
 
 ## Code of Conduct
 
-Please note that the `laims.analysis` project is released with a
+Please note that the `zeta.analysis` project is released with a
 [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
