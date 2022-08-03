@@ -5,66 +5,132 @@ description: "`r Sys.getenv('PROJ_DESCRIPTION')`"
 author:
   - name: A. Uthor
     orcid_id: "0000-0002-0520-7428"
-    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
-    affiliation_url: https://www.unipd-ubep.it/
+    affiliation: Zeta Research S.R.L
+    affiliation_url: https://www.zetaresearch.com
   - name: Corrado Lanera
     url: https://CorradoLanera.it
     orcid_id: "0000-0002-0520-7428"
     affiliation: Unit of Biostatistics, Epidemiology, and Public Health
     affiliation_url: https://www.unipd-ubep.it/
-  - name: Dario Gregori
-    orcid_id: "0000-0001-7906-0580"
-    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
-    affiliation_url: https://www.unipd-ubep.it/
-citation_url: "`r Sys.getenv('PROJ_URL')`"
+  - first_name: Federica
+    last_name: Zobec
+    affiliation: Zeta Research S.R.L
+    affiliation_url: https://www.zetaresearch.com
+citation_url: https://github.com/zeta-r/
 date: "`r Sys.Date()`"
 bibliography: biblio.bib
 preview: man/img/logo.png
+slug: "report_v00.00.00_CL"
+twitter:
+  site: "ZetaResearch"
+  creator: "CorradoLanera"
 output:
   distill::distill_article:
     toc: true
-    toc_depth: 2
-    code_folding: true
+    toc_depth: 3
+    theme: zeta.css
 ---
 
 <!-- DON'T RENDER THE REPORT BY HAND DIRECTLY! -->
-<!-- use `targets::tar_make()` instead -->
+<!-- use `dev/03-run_cycle.R` script to trigger it instead -->
 
 
 ```{r setup, include=FALSE}
 options(
-  width = 90,
+  width = 150,
   tidyverse.quiet = TRUE
 )
 
 knitr::opts_chunk$set(
   echo = FALSE,
+  comment = "",
   collapse = TRUE,
-  comment = ""
+  warning = FALSE,
+  out.width  = "100%",   # part of output covered
+  dpi = 300,             # set output resolution (impact weight)
+  fig.width = 16, fig.height = 9
 )
 
-library(glue)
-library(here)
-library(targets)
-library(tidyverse)
+suppressPackageStartupMessages({
+  library(depigner)
+  library(fontawesome)
+  library(glue)
+  library(gt)
+  library(here)
+  
+  library(pander)
+    panderOptions('knitr.auto.asis', FALSE)
+    panderOptions("round", 2)
+    panderOptions("table.split.table", Inf)
+    panderOptions(
+      "table.alignment.default",
+      function(df) c("left", rep("center", length(df) - 1L))
+    )
+    
+  library(rms)
+    options(datadist = "dd")
+  
+  library(tarchetypes)
+  library(tidyverse)
+  
+
+
+})
+
+
+htmltools::img(
+ src = knitr::image_uri(here("man", "img", "logo.png")),
+ alt = 'logo',
+ style = 'position:absolute; top:0; right:0; padding:10px;'
+ )
+fa_html_dependency()
 
 list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
   lapply(source) |> invisible()
 ```
 
 
-```{r, echo=FALSE}
-htmltools::img(
- src = knitr::image_uri(here("man", "img", "logo.png")),
- alt = 'logo',
- style = 'position:absolute; top:0; right:0; padding:10px;'
- )
+::: l-body-outset
+| **Titolo del progetto**:|  **PROJ - REPORT**           |
+|-------------------------|-----------------------------------------|
+| **Richiesta**:          | Analisi statistica                      |
+| **Committente**:        | XXXXX                                   |
+| **Analisi Statistica**: | Corrado Lanera, Zeta Research S.R.L.    |
+:::
+
+
+```{r tab-rev, layout = "l-body-outset"}
+tribble(
+  ~ `EDIZIONE N  `, ~ `REVISIONE N  `, ~ DATA       , ~ `MOTIVAZIONE DELLA REVISIONE`,
+  "01"    ,       "00"     , "2000-01-01" , "Prima edizione"
+) %>%
+  gt() %>%
+  tab_header(
+    title = "STORIA DELLE REVISIONI REPORT",
+    subtitle = glue::glue("Progetto: PROJ - REPORT")
+  ) %>%
+  fmt_date(
+    columns = c(DATA),
+    date_style = 3
+  )
 ```
 
 
-```{r packages, include=FALSE}
 
+
+## Project status
+
+```{r, message=FALSE, echo=FALSE, layout = "l-screen", out.height="400px"}
+targets::tar_visnetwork(
+  # targets_only = TRUE,
+  exclude = c(
+    "report", all_of(extract_fct_names(here::here("R/utils.R"))),
+    starts_with(".get")
+  )
+)
 ```
+
+
 
 ## Introduction
 
@@ -78,24 +144,12 @@ Footnotes use standard Pandoc markdown notation, for example ^[This will become 
 
 ## Analyses
 
-
-You can show your current state analyses' pipeline, e.g., by
-
-```{r}
-targets::tar_visnetwork(
-  # targets_only = TRUE,
-  exclude = c(
-    "report",
-    all_of(extract_fct_names(here::here("R/utils.R")))
-  )
-)
-```
-
+Here just `tar_read()` your target objects and comment it!
 
 ## Results
 
 
-You can get the results of your analyses by 
+You can get the results of your analyses as well by
 
 ```{r}
 str(tar_read(relevantResults), 1)
@@ -104,18 +158,16 @@ str(tar_read(relevantResults), 1)
 
 ## Discussion
 
-
+Lorem ipsum
 
 
 ## Acknowledgments {.appendix}
 
-This is a place to recognize people and institutions. It may also be a good place
-to acknowledge and cite software that makes your work possible.
+This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.
 
 ## Author Contributions {.appendix}
 
-We strongly encourage you to include an author contributions statement briefly 
-describing what each author did.
+We strongly encourage you to include an author contributions statement briefly describing what each author did.
 
 
 

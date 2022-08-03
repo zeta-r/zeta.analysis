@@ -1,21 +1,22 @@
 
 # Project packages (TO BE UPDATED EVERY NEW PACKAGE USED) ----------
+{
+  prj_pkgs <- c("fs", "purrr", "readr", "stringr")
+  gh_prj_pkgs <- c()
+  meta_pkgs <- c("tidymodels", "tidyverse")
 
-prj_pkgs <- c("fs", "readr", "stringr", "purrr", "qs")
-gh_prj_pkgs <- c()
-meta_pkgs <- c("tidymodels", "tidyverse")
+  renv::install(c(prj_pkgs, gh_prj_pkgs, meta_pkgs))
 
-renv::install(c(prj_pkgs, gh_prj_pkgs, meta_pkgs))
+  purrr::walk(prj_pkgs, usethis::use_package)
+  purrr::walk(gh_prj_pkgs, ~{
+    package_name <- stringr::str_extract(.x, "[\\w\\.]+$")
+    usethis::use_dev_package(package_name, remote = .x)
+  })
 
-purrr::walk(prj_pkgs, usethis::use_package)
-purrr::walk(gh_prj_pkgs, ~{
-  package_name <- stringr::str_extract(.x, "[\\w\\.]+$")
-  usethis::use_dev_package(package_name, remote = .x)
-})
-
-usethis::use_tidy_description()
-devtools::document()
-renv::status()
+  usethis::use_tidy_description()
+  devtools::document()
+  renv::status()
+}
 # renv::snapshot()
 
 

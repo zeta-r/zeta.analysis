@@ -5,18 +5,20 @@ options(
   tidyverse.quiet = TRUE
 )
 
-usethis::ui_info("
-  Welcome to the Zeta Research project template!
+if (interactive()) {
 
-  To set your environmental (private) variables,
-    you can run {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
+  usethis::ui_info("
+    Welcome to the Zeta Research project template!
 
-  Please, report any issue, comment, or suggestion to
-    https://github.com/zeta-r/zeta.analysis/issues.
+    To set your environmental (private) variables,
+      you can run {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
 
-  Thank you for using {usethis::ui_value('zeta.template')}!
-")
+    Please, report any issue, comment, or suggestion to
+      https://github.com/zeta-r/zeta.analysis/issues.
 
+    Thank you for using {usethis::ui_value('zeta.template')}!
+  ")
+}
 
 stopifnot(
   `env var "PROJ_TITLE" must be set` = Sys.getenv("PROJ_TITLE") != "",
@@ -37,27 +39,31 @@ if (interactive()) {
 
 
 if (Sys.getenv("PRJ_SHARED_PATH") == "") {
+  if (interactive()) {
+    usethis::ui_warn("
+    Environmental variable {usethis::ui_field('PRJ_SHARED_PATH')} is not set.
+    ")
 
-  usethis::ui_warn("
-  Environmental variable {usethis::ui_field('PRJ_SHARED_PATH')} is not set.
-  ")
+    usethis::ui_info("
+  You can set it to a shared path for the project.
+  You can set it in the {usethis::ui_value('.Renviron')} file.
+  You can open the project {usethis::ui_value('.Renviron')} file calling
+    {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
+    ")
 
-  usethis::ui_info("
-You can set it to a shared path for the project.
-You can set it in the {usethis::ui_value('.Renviron')} file.
-You can open the project {usethis::ui_value('.Renviron')} file calling
-  {usethis::ui_code('usethis::edit_r_environ(\"project\")')}.
-  ")
-
-  usethis::ui_todo("
-  Default path is now set to the current project folder (i.e. `_targets/` folder is not shared)
-  ")
-
+    usethis::ui_todo("
+    Default path is now set to the current project folder (i.e. `_targets/` folder is not shared)
+    ")
+  }
   Sys.setenv(PRJ_SHARED_PATH = normalizePath(here::here()))
 }
 
 
-if (!(fs::is_dir(Sys.getenv("PRJ_SHARED_PATH")))) {
+if (
+  !(fs::is_dir(
+    normalizePath(Sys.getenv("PRJ_SHARED_PATH"), mustWork = FALSE)
+  ))
+) {
   usethis::ui_stop("
   Environmental variable {usethis::ui_field('PRJ_SHARED_PATH')} is set to
   {usethis::ui_value(Sys.getenv('PRJ_SHARED_PATH'))}.
@@ -67,26 +73,31 @@ if (!(fs::is_dir(Sys.getenv("PRJ_SHARED_PATH")))) {
   ")
 }
 
-usethis::ui_done("
-{usethis::ui_field('PRJ_SHARED_PATH')} set to
-{usethis::ui_value(Sys.getenv('PRJ_SHARED_PATH'))}.
-")
+if (interactive()) {
 
-.get_prj_shared_path <- function() Sys.getenv('PRJ_SHARED_PATH')
+  usethis::ui_done("
+  {usethis::ui_field('PRJ_SHARED_PATH')} set to
+  {usethis::ui_value(normalizePath(Sys.getenv('PRJ_SHARED_PATH')))}.
+  ")
+}
+
+.get_prj_shared_path <- function(.file = "") {
+  file.path(Sys.getenv('PRJ_SHARED_PATH'), .file) |>
+    normalizePath(mustWork = FALSE)
+}
 
 targets::tar_config_set(
-  store = file.path(.get_prj_shared_path(), "_targets") |>
-    normalizePath()
+  store = .get_prj_shared_path("_targets")
 )
 
 targets::tar_config_set(
   script = here::here("_targets.R"),
-  store = file.path(.get_prj_shared_path(), "_targets"),
+  store = .get_prj_shared_path("_targets"),
   config = "tests/testthat/_targets.yaml"
 )
 
 targets::tar_config_set(
   script = here::here("_targets.R"),
-  store = file.path(.get_prj_shared_path(), "_targets"),
+  store = .get_prj_shared_path("_targets"),
   config = "reports/_targets.yaml"
 )
