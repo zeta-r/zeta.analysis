@@ -1,4 +1,6 @@
 Biostatistics
+CMD
+Codecov
 DSCTVPH
 LAIMS
 Lifecycle
@@ -8,7 +10,7 @@ UBEP
 UniPD
 Zotero
 addin
-analisi
 laims
+linters
 packages’
 reproducibility

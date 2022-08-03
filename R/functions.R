@@ -1,5 +1,5 @@
 
-# Here below put your main project's funcitons ---------------------
+# Here below put your main project's functions ---------------------
 
 
 #' Null function
@@ -20,4 +20,16 @@
 #' }
 null <- function(x = NULL) {
   if (!is.null(x)) NULL else x
+}
+
+
+import_data <- function(.dir_path) {
+  file.path(.dir_path, "db.csv") |>
+    normalizePath() |>
+    readr::read_csv()
+}
+
+
+relevant_computation <- function(db) {
+  2 * length(db) + 1
 }
