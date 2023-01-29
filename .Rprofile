@@ -4,7 +4,7 @@ options(
   tidyverse.quiet = TRUE
 )
 
-if (interactive()) {
+if (interactive() && Sys.getenv("PRJ_SHARED_PATH") != "") {
 
   usethis::ui_info("
     Welcome to this Zeta Research project!
@@ -59,6 +59,9 @@ if (Sys.getenv("PRJ_SHARED_PATH") == "") {
   Sys.setenv(PRJ_SHARED_PATH = normalizePath(getwd()))
 }
 
+Sys.setenv(
+  "PRJ_SHARED_PATH" = path.expand(Sys.getenv("PRJ_SHARED_PATH"))
+)
 
 if (
   !(dir.exists(normalizePath(Sys.getenv("PRJ_SHARED_PATH"))))
@@ -76,7 +79,7 @@ if (interactive()) {
 
   .get_prj_shared_path <- function(.file = "") {
     file.path(Sys.getenv('PRJ_SHARED_PATH'), .file) |>
-      normalizePath(mustWork = FALSE)
+      normalizePath(winslash = "/", mustWork = FALSE)
   }
 
   targets::tar_config_set(
